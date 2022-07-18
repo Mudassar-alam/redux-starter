@@ -5,8 +5,10 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 // import store from "./components/CustomStore";
 import * as actions from "./components/store/actionTypes";
-import { bugAdded, bugRemoved,bugResolved } from "./components/store/action";
+// import { bugAdded, bugRemoved,bugResolved } from "./components/store/action";
 import store from "./components/store/Store";
+import { projectAdded } from "./components/store/Projects";
+import { bugAdded, bugResolved } from "./components/store/Bugs";
 
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -18,7 +20,8 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 store.subscribe(()=>{
   console.log('Store Changed !')
 });
-store.dispatch(bugAdded({description:'Bug1'}));
+store.dispatch(projectAdded({name:'Project 1'}))
+store.dispatch(bugAdded({description:'Test 1'}));
 store.dispatch(bugAdded({description:'Bug 2'}));
 store.dispatch(bugAdded({description:'Bug 3'}));
 store.dispatch(bugResolved({id:1}));

@@ -1,6 +1,7 @@
 import * as actions from './actionTypes'
 import { bugAdded,bugRemoved , bugResolved } from  './action'
 import { createReducer } from '@reduxjs/toolkit';
+import slice from './Bugs';
 let lastId = 0;
 
 //Method : Default Redux Toolkit CreateActions
@@ -11,11 +12,11 @@ let lastId = 0;
         bugs.push({
             id:++lastId,
             description:action.payload.description,
-            resolved:true
+            resolved:false
         })
     },
-    [bugRemoved.type]:(bugs,action)=>{
-       const index = bugs.indexOf(bug => bug.id === action.payload.id)
+    [bugResolved.type]:(bugs,action)=>{
+       const index = bugs.findIndex(bug => bug.id == action.payload.id)
         bugs[index].resolved = true;
     }
     
