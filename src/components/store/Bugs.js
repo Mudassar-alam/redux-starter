@@ -6,6 +6,14 @@ const slice = createSlice({
   name: "bugs",
  initialState: [],
   reducers: {
+    bugAssignedToUser:(bugs,action)=>{
+      const {bugId, userID } = action.payload;
+      const index = bugs.findIndex(bug =>  bug.id === bugId);
+      bugs[index].userID = userID ; 
+
+
+
+    },
     bugAdded: (bugs, action) => {
       bugs.push({
         id: ++lastId,
@@ -14,11 +22,11 @@ const slice = createSlice({
       });
     },
     bugResolved: (bugs, action) => {
-      const index = bugs.findIndex((bug) => bug.id == action.payload.id);
+      const index = bugs.findIndex((bug) => bug.id === action.payload.id);
       bugs[index].resolved = true;
     },
   },
 });
 console.log(slice)
 export default slice.reducer;
-export const { bugAdded, bugResolved } = slice.actions;
+export const { bugAdded, bugResolved , bugAssignedToUser } = slice.actions;
