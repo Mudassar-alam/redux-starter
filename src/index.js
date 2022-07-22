@@ -8,7 +8,8 @@ import * as actions from "./components/store/actionTypes";
 // import { bugAdded, bugRemoved,bugResolved } from "./components/store/action";
 import store from "./components/store/Store";
 import { projectAdded } from "./components/store/Projects";
-import { bugAdded, bugResolved } from "./components/store/Bugs";
+import { bugAdded, bugResolved , bugAssignedToUser} from "./components/store/Bugs";
+import { userAdded } from './components/store/users'
 
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -20,10 +21,15 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 store.subscribe(()=>{
   console.log('Store Changed !')
 });
+
+store.dispatch(userAdded({name:'User 1'}));
+store.dispatch(userAdded({name:'User 2'}));
+
 store.dispatch(projectAdded({name:'Project 1'}))
 store.dispatch(bugAdded({description:'Test 1'}));
 store.dispatch(bugAdded({description:'Bug 2'}));
 store.dispatch(bugAdded({description:'Bug 3'}));
+store.dispatch(bugAssignedToUser({bugId: 1 , userID:1}));
 store.dispatch(bugResolved({id:1}));
 console.log(store.getState());
 
